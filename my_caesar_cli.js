@@ -47,7 +47,7 @@ const get_arg_value = (argv, ...acmd) => {
     const cmd = acmd[idx];
     index = argv.indexOf(cmd);
 
-    if (index !== -1) {
+    if (index > -1 && index + 1 <= argv.length) {
       return argv[index + 1];
     }
   }
