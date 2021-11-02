@@ -1,4 +1,7 @@
+const fs = require('fs');
 const process = require('process');
+const writable_stream = require('./writable_stream');
+const readable_stream = require('./readable_stream');
 
 const argv = process.argv.slice(2);
 
@@ -11,8 +14,8 @@ const acmd = [
 
 /**
  * Validate input commands
- * @param {*} argv 
- * @param {*} acmd 
+ * @param {Array<string>} argv 
+ * @param {Array<string>} acmd 
  */
 const validate_argv = (argv, acmd) => {
   for (let idx = 0; idx < acmd.length; idx++) {
@@ -36,9 +39,9 @@ const validate_argv = (argv, acmd) => {
 
 /**
  * Get argv value
- * @param {*} argv 
- * @param  {...any} acmd 
- * @returns 
+ * @param {Array<string>} argv Array of the argument values 
+ * @param {Array<string>} acmd Available cli commands
+ * @returns {string} Argument value
  */
 const get_arg_value = (argv, ...acmd) => {
   let index = -1;
@@ -55,7 +58,12 @@ const get_arg_value = (argv, ...acmd) => {
 
 validate_argv(argv, acmd);
 
-const arg_value = get_arg_value(argv, ...acmd[0]);
-if (typeof arg_value !== 'undefined') {
-  process.stderr.write(arg_value);
+fs.readFile
+
+const config_value = get_arg_value(argv, ...acmd[0]); //config value
+const input_value = get_arg_value(argv, ...acmd[1]); //config value
+const output_value = get_arg_value(argv, ...acmd[2]); //config value
+
+if(fs.existsSync(input_value)) {
+  const read = new readable_stream();
 }
