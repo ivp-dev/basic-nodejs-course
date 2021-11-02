@@ -1,0 +1,19 @@
+{
+  "name": "basic-nodejs-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivp-dev/basic-nodejs-course.git"
+  },
+  "author": "ivp.dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivp-dev/basic-nodejs-course/issues"
+  },
+  "homepage": "https://github.com/ivp-dev/basic-nodejs-course#readme"
+}
