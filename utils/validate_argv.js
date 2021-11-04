@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Validate input commands
  * @param {Array<string>} argv
@@ -14,7 +16,7 @@ function validate_argv(argv, acmd) {
       }
 
       return acc;
-    }, [])
+    }, []);
 
     //cmd should be single
     if (input_cmd.length > 1) {
@@ -28,3 +30,5 @@ function validate_argv(argv, acmd) {
 
   }
 }
+
+module.exports = validate_argv;

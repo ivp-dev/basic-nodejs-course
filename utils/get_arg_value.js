@@ -6,7 +6,7 @@
  * @param {Array<string>} acmd Available cli commands
  * @returns {string} Argument value
  */
-function get_arg_value(argv, ...acmd) {
+function getArgValue(argv, ...acmd) {
   let index = -1;
 
   for (let idx = 0; idx < acmd.length; idx++) {
@@ -19,4 +19,4 @@ function get_arg_value(argv, ...acmd) {
   }
 }
 
-module.exports = get_arg_value;
+module.exports = getArgValue;
