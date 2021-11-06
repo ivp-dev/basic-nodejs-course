@@ -9,7 +9,7 @@
 function getArgValue(argv, ...acmd) {
   let index = -1;
 
-  for (let idx = 0; idx < acmd.length; idx++) {
+  for (let idx = 0; idx < acmd.length - 1 /*skip required flag*/; idx++) {
     const cmd = acmd[idx];
     index = argv.indexOf(cmd);
 

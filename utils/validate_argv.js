@@ -3,12 +3,12 @@
 /**
  * Validate input commands
  * @param {Array<string>} argv
- * @param {Array<string>} acmd
+ * @param {Array<string>} acmds
  */
-function validate_argv(argv, acmd) {
+function tryValidateArgv(argv, acmds) {
   
-  for (let idx = 0; idx < acmd.length; idx++) {
-    const cmd = acmd[idx];
+  for (let idx = 0; idx < acmds.length; idx++) {
+    const cmd = acmds[idx];
     const input_cmd = argv.reduce((acc, arg) => {
 
       if (arg === cmd[0] || arg === cmd[1]) {
@@ -31,4 +31,4 @@ function validate_argv(argv, acmd) {
   }
 }
 
-module.exports = validate_argv;
+module.exports = tryValidateArgv;

@@ -1,26 +1,49 @@
 'use strict'
 
 const BaseTransform = require('stream').Transform;
+const atbash = require('../encriptors/atbash');
+const caeser = require('../encriptors/caeser');
+const bufferToUtf8 = require('../utils/buffer_to_utf8');
 
 class Transform extends BaseTransform {
-  
+
   constructor(opts) {
     super(opts);
 
-    this._config = opts.config;
+    this._transformConfig = opts.transformConfig;
+  }
+
+  _encode = (ch, cmd) => {
+    switch (cmd[0]) {
+      case 'A':
+        return atbash(ch);
+      case 'R':
+        return caeser(ch, 8, cmd[1] == false);
+      case 'C':
+        return caeser(ch, 1, cmd[1] == false);
+      default:
+        return ch;
+    }
   }
 
   _transform(chunk, _enc, callback) {
 
-    if (Buffer.isBuffer(chunk)) {
-      chunk = chunk.toString('utf8');
-    }
-
     let error;
 
+    chunk = bufferToUtf8(chunk);
+
     try {
-      this.push(chunk.toString().toUpperCase());
-    } catch (err) {
+
+      const cmds = this._transformConfig.split('-');
+
+      for (let idx = 0; idx < cmds.length; idx++) {
+        chunk = [...chunk].map((ch) => this._encode(ch, cmds[idx])).join('');
+      }
+
+      this.push(chunk);
+    }
+
+    catch (err) {
       error = err;
     }
 
@@ -30,4 +53,4 @@ class Transform extends BaseTransform {
   }
 }
 
-module.exports = Transform
+module.exports = Transform;
