@@ -1,8 +1,8 @@
 'use strict'
 
 const BaseTransform = require('stream').Transform;
-const atbash = require('../encriptors/atbash');
-const caeser = require('../encriptors/caeser');
+const atbash = require('../encryptors/atbash');
+const caeser = require('../encryptors/caeser');
 const bufferToUtf8 = require('../utils/buffer_to_utf8');
 
 class Transform extends BaseTransform {

@@ -6,7 +6,6 @@ const validateArgv = require('./utils/validate_argv');
 const validateConfig = require('./utils/validate_config');
 const getArgValue = require('./utils/get_arg_value');
 const ifError = require('./utils/if_error');
-const Readable = require("stream").Readable;
 
 const Transform = require('./streams/transform_stream');
 const createWriteStream = require('./utils/create_write_stream');
@@ -65,26 +64,9 @@ if (inputPath) {
 }
 //if input doesn't set read from stdin
 else {
-
-  const buffers = [];
-
-  //run and listen data event
-  process.stdin.on('data', (data) => {
-    buffers.push(data);
-  });
-
-  //listen when user done and output transformed data
-  process.on('SIGINT', () => {
-    const buffer = Buffer.concat(buffers);
-
-    Readable
-      .from(buffer)
-      .pipe(new Transform({ transformConfig }))
-      //write according with outputPath 
-      //if it set write to file 
-      //otherwise in stdout
-      .pipe(createWriteStream(outputPath, { flags: 'a' /*append*/ }))
-      .on('finish', () => process.exit(0));
-  });
+  
+  process.stdin
+    .pipe(new Transform({ transformConfig }))
+    .pipe(createWriteStream(outputPath, { flags: 'a' }));
 
 }
