@@ -59,8 +59,7 @@ if (inputPath) {
     //write according with outputPath 
     //if it set write to file 
     //otherwise in stdout
-    .pipe(createWriteStream(outputPath, { flags: 'a' /*append*/ }))
-    .on('finish', () => process.exit(0));
+    .pipe(createWriteStream(outputPath, { flags: 'a' /*append*/ }));
 }
 //if input doesn't set read from stdin
 else {
