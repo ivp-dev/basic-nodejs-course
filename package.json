@@ -4,7 +4,8 @@
   "description": "",
   "main": "my_ciphering_cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:c": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/ivp-dev/basic-nodejs-course/issues"
   },
-  "homepage": "https://github.com/ivp-dev/basic-nodejs-course#readme"
+  "homepage": "https://github.com/ivp-dev/basic-nodejs-course#readme",
+  "devDependencies": {
+    "@jest/globals": "^27.3.1",
+    "jest": "^27.3.1"
+  }
 }
