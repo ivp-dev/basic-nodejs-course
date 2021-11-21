@@ -10,12 +10,7 @@ const ifError = require('./utils/if_error');
 const Transform = require('./streams/transform_stream');
 const createWriteStream = require('./utils/create_write_stream');
 
-//available cli commands
-const acmds = [
-  ['-c', '--config', true  /*required*/], // config index:0
-  ['-i', '--input', false  /*optional*/], // input  index:1
-  ['-o', '--output', false /*optional*/]  // output index:2
-];
+const acmds = require('./available_commands');
 
 //romove exec file path and node path
 const argv = process.argv.slice(2);
@@ -63,7 +58,7 @@ if (inputPath) {
 }
 //if input doesn't set read from stdin
 else {
-  
+
   process.stdin
     .pipe(new Transform({ transformConfig }))
     .pipe(createWriteStream(outputPath, { flags: 'a' }));

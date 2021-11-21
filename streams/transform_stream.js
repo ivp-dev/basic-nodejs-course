@@ -4,6 +4,7 @@ const BaseTransform = require('stream').Transform;
 const atbash = require('../encryptors/atbash');
 const caeser = require('../encryptors/caeser');
 const bufferToUtf8 = require('../utils/buffer_to_utf8');
+const isCharAvailable = require('../utils/is_char_available');
 
 class Transform extends BaseTransform {
 
@@ -37,7 +38,11 @@ class Transform extends BaseTransform {
       const cmds = this._transformConfig.split('-');
 
       for (let idx = 0; idx < cmds.length; idx++) {
-        chunk = [...chunk].map((ch) => this._encode(ch, cmds[idx])).join('');
+        chunk = [...chunk].map((ch) => {
+          if (isCharAvailable(ch)) {
+            return this._encode(ch, cmds[idx]);
+          } return ch;
+        }).join('');
       }
 
       this.push(chunk);
